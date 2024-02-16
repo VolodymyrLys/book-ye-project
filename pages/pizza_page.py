@@ -31,6 +31,8 @@ class PizzaPage(BasePage):
         products = self._driver.find_elements(*PizzaPageLocators.LOCATOR_PRODUCTS)
         for product in products:
             self.product_list.append(PropertyOfProduct(product))
+        # test = self.product_list[0]
+        # print(test)
         return self.product_list
 
     def get_products_name_list(self) -> list:
