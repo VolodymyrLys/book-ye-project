@@ -1,5 +1,5 @@
 from typing import List
-from selenium.webdriver import Chrome
+from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import Remote
@@ -16,6 +16,8 @@ creds:
 xbcanplku5@tippabble.com
 123456
 """
+
+
 class BasePage:
     """Base page class."""
 
@@ -34,8 +36,10 @@ class BasePage:
         :param:
         :return: WebElement
         """
-        return WebDriverWait(self._driver, time).until(EC.presence_of_element_located(locator),
-                                                       message=f"Can't find element by locator {locator}")
+        return WebDriverWait(self._driver, time).until(
+            EC.presence_of_element_located(locator),
+            message=f"Can't find element by locator {locator}",
+        )
 
     def find_elements(self, locator: str, time=10) -> list[WebElement]:
         """Method which find elements on page.
@@ -44,8 +48,10 @@ class BasePage:
         :param: string
         :return: Tuple[WebElements]
         """
-        return WebDriverWait(self._driver, time).until(EC.presence_of_all_elements_located(locator),
-                                                       message=f"Can't find elements by locator {locator}")
+        return WebDriverWait(self._driver, time).until(
+            EC.presence_of_all_elements_located(locator),
+            message=f"Can't find elements by locator {locator}",
+        )
 
     def go_to_site(self) -> WebElement:
         """Method which go to the main page.
@@ -53,10 +59,3 @@ class BasePage:
         :return:WebElement
         """
         return self._driver.get(self.base_url)
-
-
-if __name__ == '__main__':
-    browser = Chrome()
-    browser.maximize_window()
-    page = BasePage(browser)
-    page.go_to_site()

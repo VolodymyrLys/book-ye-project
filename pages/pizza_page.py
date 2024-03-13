@@ -1,3 +1,5 @@
+import time
+
 from pages.base import BasePage
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver import Remote
@@ -15,7 +17,7 @@ class PizzaPage(BasePage):
         super().__init__(driver)
         self.product_list = []
 
-    def go_to_pizza_page(self) -> WebElement:
+    def go_to_pizza_page(self) -> None:
         """Method which go to Pizza page.
 
         :return:WebElement
@@ -31,8 +33,6 @@ class PizzaPage(BasePage):
         products = self._driver.find_elements(*PizzaPageLocators.LOCATOR_PRODUCTS)
         for product in products:
             self.product_list.append(PropertyOfProduct(product))
-        # test = self.product_list[0]
-        # print(test)
         return self.product_list
 
     def get_products_name_list(self) -> list:
@@ -48,20 +48,25 @@ class PizzaPage(BasePage):
     def add_product_to_shopping_cart(self, product_name: str) -> None:
         """Method which add appointed product to the cart.
 
-         :param: string
-         :return: None
-         """
+        :param: string
+        :return: None
+        """
         for product in self.product_list:
             if product.get_name() == product_name:
                 product.click_add_to_cart()
+                break
+        time.sleep(3)
 
     def catch_message(self) -> str:
         """Method which catch message when added product to shopping cart.
 
         :return: string
         """
-        message = WebDriverWait(self._driver, 15).until(EC.element_to_be_clickable
-                                                        (PizzaPageLocators.LOCATOR_MESSAGE_ADD_TO_CART))
+        message = WebDriverWait(self._driver, 15).until(
+            EC.presence_of_element_located(
+                PizzaPageLocators.LOCATOR_MESSAGE_ADD_TO_CART
+            )
+        )
         return message.text
 
 

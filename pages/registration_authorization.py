@@ -1,7 +1,9 @@
 from selenium.webdriver.remote.webelement import WebElement
 import time
 from pages.base import BasePage
-from pages.locators.registrationauthorization_locator import RegistrationAuthorizationPageLocators
+from pages.locators.registrationauthorization_locator import (
+    RegistrationAuthorizationPageLocators,
+)
 
 
 class RegistrationAuthorizationPage(BasePage):
@@ -26,13 +28,17 @@ class RegistrationAuthorizationPage(BasePage):
         :param: string
         :return:None
         """
-        self._driver.find_element(*RegistrationAuthorizationPageLocators.LOCATOR_PHONE).send_keys(
-            login)
+        self._driver.find_element(
+            *RegistrationAuthorizationPageLocators.LOCATOR_PHONE
+        ).send_keys(login)
         time.sleep(5)
-        self._driver.find_element(*RegistrationAuthorizationPageLocators.LOCATOR_PASSWORD).send_keys(
-            password)
+        self._driver.find_element(
+            *RegistrationAuthorizationPageLocators.LOCATOR_PASSWORD
+        ).send_keys(password)
         time.sleep(5)
-        self._driver.find_element(*RegistrationAuthorizationPageLocators.LOCATOR_SUBMIT_BUTTON).click()
+        self._driver.find_element(
+            *RegistrationAuthorizationPageLocators.LOCATOR_SUBMIT_BUTTON
+        ).click()
         time.sleep(5)
 
     def log_out_from_account(self) -> None:
