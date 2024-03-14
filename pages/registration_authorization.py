@@ -15,7 +15,7 @@ class RegistrationAuthorizationPage(BasePage):
         super().__init__(driver)
 
     def go_to_registration_page(self) -> WebElement:
-        """Method which go to Rolls page.
+        """Method which go to Pizza page.
 
         :return:WebElement
         """
@@ -31,15 +31,15 @@ class RegistrationAuthorizationPage(BasePage):
         self._driver.find_element(
             *RegistrationAuthorizationPageLocators.LOCATOR_PHONE
         ).send_keys(login)
-        time.sleep(5)
+        time.sleep(2)
         self._driver.find_element(
             *RegistrationAuthorizationPageLocators.LOCATOR_PASSWORD
         ).send_keys(password)
-        time.sleep(5)
+        time.sleep(2)
         self._driver.find_element(
             *RegistrationAuthorizationPageLocators.LOCATOR_SUBMIT_BUTTON
         ).click()
-        time.sleep(5)
+        time.sleep(2)
 
     def log_out_from_account(self) -> None:
         """Method which log out from user account.

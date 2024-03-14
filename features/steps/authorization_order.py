@@ -1,20 +1,14 @@
 import time
-
 from behave_webdriver.steps import *
-
 from testData.constants import PizzaCheckMessage
 from pages.registration_authorization import RegistrationAuthorizationPage
 from pages.pizza_page import PizzaPage
-
-
-# from testData.constants import *
 
 
 # Open maim page
 @given('website "{url}"')
 def step(context, url):
     context.browser.get(url)
-
 
 @then("I go to user authorization page")
 def step(context):
